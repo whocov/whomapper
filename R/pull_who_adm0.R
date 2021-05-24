@@ -33,7 +33,7 @@ pull_who_adm0 <- function() {
 
   return(list(
     "adm0" = adm0,
-    "adm0_line" = amd0_line,
+    "adm0_line" = adm0_line,
     "disp_area" = disp_area,
     "disp_border" = disp_border
   ))
