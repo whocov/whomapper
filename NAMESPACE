@@ -2,6 +2,8 @@
 
 export(pull_who_adm0)
 export(pull_who_logo)
+export(who_map_annotate)
+export(who_map_disp)
 import(dplyr)
 import(ggplot2)
 import(ggsn)

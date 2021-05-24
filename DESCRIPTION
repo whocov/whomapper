@@ -15,5 +15,7 @@ Imports:
   ggplot2,
   tidyr,
   stringr,
-  png
+  png,
+  ggpattern
+Remotes: coolbutuseless/ggpattern
 RoxygenNote: 7.1.1
