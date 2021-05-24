@@ -1,0 +1,25 @@
+Package: whomapper
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R:
+  person(given = "Henry",
+           family = "Laurenson-Schafer",
+           role = c("aut", "cre"),
+           email = laurensonschaferh@who.int),
+  person(given = "Neale",
+           family = "Batra",
+           role = "aut",
+           email = batran@who.int),
+  person(given = "Yurie",
+           family = "Izawa",
+           role = "aut",
+           email = izaway@who.int)
+Description: A package to distribute WHO legal shapefiles and maps, and produce simple plots with them
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  sf,
+  
