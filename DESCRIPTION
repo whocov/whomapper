@@ -10,5 +10,10 @@ LazyData: true
 Imports:
   dplyr,
   sf,
-  janitor
+  janitor,
+  ggsn,
+  ggplot2,
+  tidyr,
+  stringr,
+  png
 RoxygenNote: 7.1.1
