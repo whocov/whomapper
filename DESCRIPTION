@@ -16,6 +16,7 @@ Imports:
   tidyr,
   stringr,
   png,
-  ggpattern
+  ggpattern,
+  ggnewscale
 Remotes: coolbutuseless/ggpattern
 RoxygenNote: 7.1.1

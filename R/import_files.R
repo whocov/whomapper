@@ -6,4 +6,5 @@
 #'@import tidyr
 #'@import stringr
 #'@import png
+#'@import ggnewscale
 NULL

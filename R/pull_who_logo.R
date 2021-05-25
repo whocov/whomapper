@@ -6,5 +6,5 @@
 
 
 pull_who_logo <- function() {
-  png::readPNG(system.file("extdata", "WHO-EN-C-H.png", package="whomapper"))
+  png::readPNG(system.file("extdata", "WHO_logo.png", package="whomapper"))
 }

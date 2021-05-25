@@ -2,16 +2,16 @@
 #' code by IZAWA, Yurie & LAURENSON-SCHAFER Henry
 #' @details function to add disputed territories to WHO map
 #' @param sf list of shapefiles to be used
+#' @param new_scale - should a new scale be added?
 #' @export
 
 
-who_map_disp <- function(sf = pull_who_adm0()) {
+who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
 
   disp_area <- sf$disp_area
   disp_border <- sf$disp_border
 
-  geom_sf(data = disp_area[disp_area$name == "Western Sahara",],
-          aes(fill = "#cccccc"), color = NA) +
+  geoms_out <- geom_sf(data = disp_area[disp_area$name == "Western Sahara",], aes(fill = "#cccccc"), color = NA) +
 
     # Disputed areas
     # 1) Aksai Chin
@@ -76,5 +76,14 @@ who_map_disp <- function(sf = pull_who_adm0()) {
     # Lakes
     geom_sf(data = disp_area[disp_area$name=="Lakes",], color = "#BEE8FF", fill = "#BEE8FF")
 
+  if (add_na_scale) {
+    geoms_out <- geoms_out +
+      ggnewscale::new_scale_fill() +
+      scale_fill_manual(values="#cccccc",
+                        name = NULL,
+                        labels = "Not applicable")
 
+  }
+
+  geoms_out
 }
