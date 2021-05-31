@@ -11,7 +11,10 @@ This is an experiemental package to house WHO shapefiles and create WHO legal ma
 To install this package for the first time: 
 
 ```
-devtools::install_github("whocov/whomapper", auth_token = "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", force = TRUE, dependencies = TRUE)
+devtools::install_github("whocov/whomapper", 
+                          auth_token = "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", 
+                          force = TRUE, 
+                          dependencies = TRUE)
 ```
 ## Reading shapefiles
 
@@ -37,6 +40,7 @@ This package has been set up to allow for flexible use of `ggplot2` for mapping.
 Be sure to check out our sister app [phifunc](https://github.com/whocov/phifunc) to run this code!
 
 ```
+library(whomapper)
 library(phifunc)
 library(tidyverse)
 library(glue)
