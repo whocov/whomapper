@@ -17,6 +17,7 @@ Imports:
   stringr,
   png,
   ggpattern,
-  ggnewscale
+  ggnewscale,
+  grid
 Remotes: coolbutuseless/ggpattern
 RoxygenNote: 7.1.1

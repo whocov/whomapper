@@ -14,11 +14,12 @@ who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
   if (add_na_scale) {
     geoms_out <- list(
       ggnewscale::new_scale_fill(),
-      scale_fill_manual(values="#cccccc",
+      scale_fill_manual(values=c("Not applicable" = "#cccccc", "No data" = "#d2d2d2"),
                         name = NULL,
-                        breaks = "Not applicable",
+                        breaks = c("Not applicable", "No data"),
                         drop = FALSE,
-                        labels = "Not applicable")
+                        limits = c("Not applicable", "No data"),
+                        labels = c("Not applicable", "No data"))
     )
   } else {
     geoms_out <- list()
