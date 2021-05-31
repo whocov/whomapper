@@ -4,6 +4,7 @@ Authors: Yurie Izawa & Henry Laurenson-Schafer
 
 This is an experiemental package to house WHO shapefiles and create WHO legal maps. ***Please note that the user of this package is responsible for ensuring that any maps they produce fuffil WHO legal standards.*** Please read the WHO map SOP before using [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf).
 
+***THIS APP IS CURRENTLY IN EARLY DEVELOPMENT - PLEASE LOG A GITHUB ISSUE OR CONTACT THE AUTHORS FOR ANY ISSUES***
 
 ## Installation
 
