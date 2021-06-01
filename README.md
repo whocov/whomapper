@@ -4,13 +4,17 @@ Authors: Yurie Izawa & Henry Laurenson-Schafer
 
 This is an experiemental package to house WHO shapefiles and create WHO legal maps. ***Please note that the user of this package is responsible for ensuring that any maps they produce fuffil WHO legal standards.*** Please read the WHO map SOP before using [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf).
 
+***THIS APP IS CURRENTLY IN EARLY DEVELOPMENT - PLEASE LOG A GITHUB ISSUE OR CONTACT THE AUTHORS FOR ANY ISSUES***
 
 ## Installation
 
 To install this package for the first time: 
 
 ```
-devtools::install_github("whocov/whomapper", auth_token = "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", force = TRUE, dependencies = TRUE)
+devtools::install_github("whocov/whomapper", 
+                          auth_token = "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", 
+                          force = TRUE, 
+                          dependencies = TRUE)
 ```
 ## Reading shapefiles
 
@@ -36,6 +40,7 @@ This package has been set up to allow for flexible use of `ggplot2` for mapping.
 Be sure to check out our sister app [phifunc](https://github.com/whocov/phifunc) to run this code!
 
 ```
+library(whomapper)
 library(phifunc)
 library(tidyverse)
 library(glue)
