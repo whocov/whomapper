@@ -77,4 +77,4 @@ who_map_save(glue::glue("cases_per_100k_{Sys.Date()}.png"))
 
 This code produces this plot:
 
-![cases_per_100k_2021-06-01](https://user-images.githubusercontent.com/38218241/120302092-d1ddf280-c2cd-11eb-885f-5e6ead88cc6f.png)
+![cases_per_100k_2021-06-01](https://user-images.githubusercontent.com/38218241/120303548-3baacc00-c2cf-11eb-807f-0f0df3d3112b.png)
