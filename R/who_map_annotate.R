@@ -12,7 +12,7 @@ who_map_annotate <- function(data_source) {
   if (missing(data_source)) {
     data_source <- glue::glue("Data Source: World Health Organization,
                               Map Production: WHO Health Emergencies Programme
-                              \u00A9 WHO 2020. All rights reserved.")
+                              \u00A9 WHO {format(Sys.Date(), '%Y')}. All rights reserved.")
   }
 
 
