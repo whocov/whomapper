@@ -8,6 +8,7 @@ who_map_theme <- function() {
   list(
     coord_sf(expand = FALSE),
     expand_limits(x = c(0, 0), y = c(-90, 100)),
+    guides(colour = guide_legend(override.aes = list(col = "black"))),
     theme(
       # Background
       panel.grid.major = element_blank(),
