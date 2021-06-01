@@ -45,11 +45,12 @@ library(phifunc)
 library(tidyverse)
 library(glue)
 
-case_death <- pull_phi_data() %>% 
-  normalise_date()
+case_death <- pull_phi_data() %>% normalise_date()
 
 cd_latest <- case_death %>% 
-  filter(report_date == max(report_date))
+  group_by(iso3) %>% 
+  filter(report_date == max(report_date)) %>% 
+  ungroup()
 
 sfs <- pull_who_adm0()
 
@@ -69,10 +70,11 @@ ggplot() +
   labs(title ="COVID-19 cases per 100k", subtitle = glue::glue("as of {format(Sys.Date(), '%d %b %y')}")) +
   who_map_pipeline()
 
-who_map_save(glue::glue("cases_per_100k_{Sys.Date()}.png"), dpi = 600)
+who_map_save(glue::glue("cases_per_100k_{Sys.Date()}.png"))
+
 
 ```
 
 This code produces this plot:
 
-![cases_per_100k_2021-05-31](https://user-images.githubusercontent.com/38218241/120209436-fa62df80-c22e-11eb-960c-c7ee84b2473c.png)
+![cases_per_100k_2021-06-01](https://user-images.githubusercontent.com/38218241/120302092-d1ddf280-c2cd-11eb-885f-5e6ead88cc6f.png)
