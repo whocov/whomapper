@@ -8,7 +8,7 @@
 
 who_map_col <- function(x = "no_data") {
 
-  case_when(x == "no_data" ~ "f0f0f0",
+  case_when(x == "no_data" ~ "#f0f0f0",
             x == "not_applicable" ~ "#cccccc",
             x == "background" ~ "#EBEBEB",
             x == "lakes" ~ "#BEE8FF",
