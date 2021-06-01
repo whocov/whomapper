@@ -28,7 +28,7 @@ who_map_theme <- function() {
       plot.caption = element_text(hjust = 0, size = 8),
 
       # Legend
-      legend.position = c(0.14, 0.12),
+      legend.position = c(0.16, 0.13),
       legend.title = element_text(size = 10, face = "bold"),
       legend.text = element_text(size = 10),
       legend.box = "horizontal",
