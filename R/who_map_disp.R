@@ -42,8 +42,8 @@ who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
                                  #pattern_density = 0.3, # Value from 0-1 (1 being very dense)
                                  pattern_colour = "#cccccc",
                                  pattern_fill = "#cccccc",
-                                 pattern_size = 0.4,
-                                 size = 0.5,
+                                 pattern_size = 0.2,
+                                 size = 0.2,
                                  color = NA,
                                  fill = NA),
 
@@ -53,45 +53,46 @@ who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
       # 2) Jammu and Kashmir
       # Fill: grey 20%, Outline: same as ADM0 lines
       geom_sf(data = disp_area[disp_area$name == "Jammu and Kashmir",],
-              fill = "#cccccc", color = "#9c9c9c"),
+              fill = "#cccccc", color = "#9c9c9c", size = 0.2),
 
       geom_sf(data = disp_border[disp_border$name %in% c("J&K (IND Claim)", "J&K (PAK Claim)"),],
-              color="#ECECEC", linetype = "dotted"),
+              color="#ECECEC", linetype = "dotted", size = 0.2),
       geom_sf(data = disp_border[disp_border$name =="J&K Line of Control",],
-              color = "#9c9c9c", linetype = "dotted"),
+              color = "#9c9c9c", linetype = "dotted", size = 0.2),
       # 4) Sudan - South Sudan (Abyei)
       # Fill & outline: grey 20%
-      geom_sf(data = disp_area[disp_area$name == "Abyei",], fill = "#cccccc", color = "#9c9c9c"),
+      geom_sf(data = disp_area[disp_area$name == "Abyei",], fill = "#cccccc", color = "#9c9c9c",
+              size = 0.2),
       geom_sf(data = disp_border[disp_border$name == "Abyei (SSD Claim)",],
-              color = "#ECECEC", linetype = "dotted"),
+              color = "#ECECEC", linetype = "dotted", size = 0.2),
       geom_sf(data = disp_border[disp_border$name %in% c("Abyei (SDN Claim)", "Sudan-South Sudan"),],
-              color = "#ECECEC", linetype = "dotted"),
+              color = "#ECECEC", linetype = "dotted", size = 0.2),
 
       # 5) Arunachal Pradesh: same as ADM0 lines
       geom_sf(data = disp_border[disp_border$name =="Arunachal Pradesh",],
-              color="#9c9c9c", size=0.5),
+              color="#9c9c9c", size = 0.2),
 
       # 6) Egypt-Sudan
       geom_sf(data = disp_border[disp_border$name %in% c("Bir Tawil 1", "Halayib Triangle (EGY Claim)"),],
-              color = "#9c9c9c", size = 0.5),
+              color = "#9c9c9c", size = 0.2),
       geom_sf(data = disp_border[disp_border$name %in% c("Bir Tawil 2", "Halayib Triangle (SDN Claim)"),],
-              color = "#ECECEC", linetype = "dotted"),
+              color = "#ECECEC", linetype = "dotted", size = 0.2),
 
       # 7) South Sudan - Kenya
       geom_sf(data = disp_border[disp_border$name == "Ilemi Triangle",],
-              color = "#9c9c9c", linetype = "dotted"),
+              color = "#9c9c9c", linetype = "dotted", size = 0.2),
 
       # 8) North - South Korea: grey 10%
       geom_sf(data = disp_border[disp_border$name == "Korean DMZ",],
-              color = "#ECECEC", linetype = "dotted"),
+              color = "#ECECEC", linetype = "dotted", size = 0.2),
 
       # 9) Kosovo
       geom_sf(data = disp_border[disp_border$name == "Kosovo",],
-              color = "#9c9c9c", linetype = "dotted"),
+              color = "#9c9c9c", linetype = "dotted", size = 0.2),
 
       # 10) oPt: grey 10%
       geom_sf(data = disp_border[disp_border$name=="West Bank",],
-              color = "#ECECEC", linetype = "dotted"),
+              color = "#ECECEC", linetype = "dotted", size = 0.2),
 
       # Lakes
       geom_sf(data = disp_area[disp_area$name=="Lakes",], color = "#BEE8FF", fill = "#BEE8FF"),

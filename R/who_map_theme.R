@@ -7,7 +7,7 @@
 who_map_theme <- function() {
   list(
     coord_sf(expand = FALSE, clip = "off"),
-    expand_limits(x = c(0, 0), y = c(-90, 100)),
+    expand_limits(x = c(0, 0), y = c(-80, 100)),
     guides(fill = guide_legend(override.aes = list(col = "black"))),
     theme(
       # Background
@@ -29,10 +29,10 @@ who_map_theme <- function() {
       plot.caption = element_text(hjust = 0, size = 8),
 
       # Legend
-      legend.position = "bottom",
+      legend.position = "right",
       legend.title = element_text(size = 10, face = "bold"),
       legend.text = element_text(size = 10),
-      legend.box = "horizontal",
+      legend.box = "vertical",
       legend.background = element_rect(fill = NA),
       legend.key.size = unit(0.5, 'cm')
     )

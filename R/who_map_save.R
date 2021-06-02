@@ -6,7 +6,7 @@
 #' @export
 
 
-who_map_save <- function(name, plot = ggplot2::last_plot(), dpi = 700, ...) {
+who_map_save <- function(name, plot = ggplot2::last_plot(), dpi = 800, ...) {
 
   ggsave(name, plot, width = 300, height = 183, units = "mm", dpi = dpi, ...)
 
