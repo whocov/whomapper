@@ -14,7 +14,8 @@ who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
   if (add_na_scale) {
     geoms_out <- list(
       ggnewscale::new_scale_fill(),
-      scale_fill_manual(values=c("Not applicable" = "#cccccc", "No data" = "#d2d2d2"),
+      scale_fill_manual(values=c("Not applicable" = who_map_col("not_applicable"),
+                                 "No data" = who_map_col("no_data")),
                         name = NULL,
                         breaks = c("Not applicable", "No data"),
                         drop = FALSE,

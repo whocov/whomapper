@@ -19,9 +19,13 @@ who_map_annotate <- function(data_source) {
   logo <-  pull_who_logo()
 
   # 4. Disclaimer
-  text_disc <- glue::glue("The designations employed and the presentation of the material in this publication do not imply the expression of any opinion whatsoever on the part of WHO concerning the legal status of any country, territory, city or area
-                          or of its authorities, or concerning the delimitation of its frontiers or boundaries. Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement.[1] All references to Kosovo
-                          in this document should be understood to be in the context of the United Nations Security Council resolution 1244 (1999). Data for Serbia and Kosovo (UNSCR 1244, 1999) have been aggregated for visualization purposes.")
+  text_disc <-
+    glue::glue("The designations employed and the presentation of the material in this publication \\
+                  do not imply the expression of any opinion whatsoever on the part of WHO
+               concerning the legal status of any country, territory, city or area or of its authorities, \\
+               or concerning the delimitation of its frontiers or boundaries.
+               Dotted and dashed lines on maps represent approximate border \\
+                  lines for which there may not yet be full agreement")
 
   # list(
   #   annotation_custom(rasterGrob(logo), xmin = 150, xmax = 180, ymin = 70, ymax = 100),
@@ -30,7 +34,8 @@ who_map_annotate <- function(data_source) {
   # )
 
   list(
-    annotation_custom(rasterGrob(logo), xmin = 125, xmax = 175, ymin = 70, ymax = 100),
+    annotation_custom(grobTree(rasterGrob(logo, x = unit(0.91, "npc"), y = unit(1.06,"npc"), width = 0.18))),
+    # annotation_custom(rasterGrob(logo), xmin = 125, xmax = 175, ymin = 70, ymax = 100),
     labs(caption = glue::glue("{text_disc}\n\n{data_source}"))
   )
 
