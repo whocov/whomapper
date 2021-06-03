@@ -11,7 +11,7 @@ who_map_annotate <- function(region = "HQ", data_source) {
   # 2. Data source (modify accordingly)
 
   if (missing(data_source)) {
-    data_source <- glue::glue("Data Source: World Health Organization,
+    data_source <- glue::glue("Data Source: World Health Organization
                               Map Production: WHO Health Emergencies Programme
                               \u00A9 WHO {format(Sys.Date(), '%Y')}. All rights reserved.")
   }
@@ -23,7 +23,7 @@ who_map_annotate <- function(region = "HQ", data_source) {
   text_disc <-
     glue::glue("The designations employed and the presentation of the material in this publication do not imply the expression of any opinion whatsoever on the part of WHO
                concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
-               Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement")
+               Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement.")
 
   y_logo <- case_when(
     grepl("hq|global", region, ignore.case = T) ~ "WHO_logo.png",
