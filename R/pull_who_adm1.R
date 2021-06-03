@@ -8,7 +8,8 @@
 
 pull_who_adm1 <- function() {
 
-  out <- readr::read_rds(system.file("extdata", "adm1.rds", package="whomapper"))
+  out <- readr::read_rds(system.file("extdata", "adm1.rds", package="whomapper")) %>%
+    janitor::clean_names()
 
   return(out)
 }
