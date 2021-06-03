@@ -38,9 +38,9 @@ This package has been set up to allow for flexible use of `ggplot2` for mapping.
 1. Read in shapefiles (packaged with `whomapper`)
 2. Merge data of interest with the `adm0` list element of the shapefiles (the polygons)
 3. Begin a standard ggplot:
-  a. Plot shapefiles with `geom_sf_who_poly()`
-  b. Define legend aesthetics with `scale_...()`
-  c. Define labels for the plot
+    1.Plot shapefiles with `geom_sf_who_poly()`
+    2.Define legend aesthetics with `scale_...()`
+    3.Define labels for the plot
 4. call `who_map_pipeline()` to define disputed areas, theme, legal text etc.
 5. Save the plot using `who_map_save()` - This ensures that dimensions are correct. 
 
