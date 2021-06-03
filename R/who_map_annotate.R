@@ -20,12 +20,9 @@ who_map_annotate <- function(data_source) {
 
   # 4. Disclaimer
   text_disc <-
-    glue::glue("The designations employed and the presentation of the material in this publication \\
-                  do not imply the expression of any opinion whatsoever on the part of WHO
-               concerning the legal status of any country, territory, city or area or of its authorities, \\
-               or concerning the delimitation of its frontiers or boundaries.
-               Dotted and dashed lines on maps represent approximate border \\
-                  lines for which there may not yet be full agreement")
+    glue::glue("The designations employed and the presentation of the material in this publication do not imply the expression of any opinion whatsoever on the part of WHO
+               concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
+               Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement")
 
   # list(
   #   annotation_custom(rasterGrob(logo), xmin = 150, xmax = 180, ymin = 70, ymax = 100),
