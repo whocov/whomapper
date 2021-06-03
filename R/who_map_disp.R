@@ -48,7 +48,7 @@ who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
                                  fill = NA),
 
       geom_sf(data = disp_area[disp_area$name == "Aksai Chin",],
-              fill = NA, color = "#9c9c9c"),
+              fill = NA, color = "#9c9c9c", size = 0.2),
 
       # 2) Jammu and Kashmir
       # Fill: grey 20%, Outline: same as ADM0 lines
