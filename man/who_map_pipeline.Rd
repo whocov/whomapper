@@ -5,10 +5,12 @@
 \title{wrapper function to add all components to who map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_pipeline(sf = pull_who_adm0())
+who_map_pipeline(sf = pull_who_adm0(), region = "HQ")
 }
 \arguments{
 \item{sf}{- list of shapefiles to be used}
+
+\item{region}{- user defined region for logo and disclaimer text}
 }
 \description{
 wrapper function to add all components to who map

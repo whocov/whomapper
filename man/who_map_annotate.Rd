@@ -5,9 +5,11 @@
 \title{function to add annotations to WHO map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_annotate(data_source)
+who_map_annotate(region = "HQ", data_source)
 }
 \arguments{
+\item{region}{- user defined region for logo and disclaimer text}
+
 \item{data_source}{- user defined data source}
 }
 \description{

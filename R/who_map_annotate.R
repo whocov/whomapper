@@ -1,11 +1,12 @@
 #' function to add annotations to WHO map
 #' code by IZAWA, Yurie & LAURENSON-SCHAFER Henry
 #' @details function to add annotations to WHO map
+#' @param region - user defined region for logo and disclaimer text
 #' @param data_source - user defined data source
 #' @export
 
 
-who_map_annotate <- function(data_source) {
+who_map_annotate <- function(region = "HQ", data_source) {
 
   # 2. Data source (modify accordingly)
 
@@ -16,7 +17,7 @@ who_map_annotate <- function(data_source) {
   }
 
 
-  logo <-  pull_who_logo()
+  logo <-  pull_who_logo(region)
 
   # 4. Disclaimer
   text_disc <-

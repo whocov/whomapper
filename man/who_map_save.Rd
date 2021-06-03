@@ -5,7 +5,7 @@
 \title{wrapper function around ggsave to save map in correct dimensions
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_save(name, plot = ggplot2::last_plot(), dpi = 700, ...)
+who_map_save(name, plot = ggplot2::last_plot(), dpi = 800, ...)
 }
 \arguments{
 \item{name}{the name of the plot to be saved}

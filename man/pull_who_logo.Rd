@@ -5,7 +5,10 @@
 \title{function to read the WHO logo for mapping puroses
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-pull_who_logo()
+pull_who_logo(region = "HQ")
+}
+\arguments{
+\item{region}{- which regional logo should be taken - defaults to HQ}
 }
 \value{
 a PNG of the WHO logo
