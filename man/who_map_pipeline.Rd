@@ -5,12 +5,18 @@
 \title{wrapper function to add all components to who map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_pipeline(sf = pull_who_adm0(), region = "HQ")
+who_map_pipeline(
+  sf = pull_who_adm0(),
+  region = "HQ",
+  data_source = "World Health Organization"
+)
 }
 \arguments{
 \item{sf}{- list of shapefiles to be used}
 
 \item{region}{- user defined region for logo and disclaimer text}
+
+\item{data_source}{- user defined data source}
 }
 \description{
 wrapper function to add all components to who map
