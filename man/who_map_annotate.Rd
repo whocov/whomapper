@@ -5,7 +5,7 @@
 \title{function to add annotations to WHO map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_annotate(region = "HQ", data_source)
+who_map_annotate(region = "HQ", data_source = "World Health Organization")
 }
 \arguments{
 \item{region}{- user defined region for logo and disclaimer text}

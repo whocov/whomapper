@@ -6,15 +6,13 @@
 #' @export
 
 
-who_map_annotate <- function(region = "HQ", data_source) {
+who_map_annotate <- function(region = "HQ", data_source = "World Health Organization") {
 
   # 2. Data source (modify accordingly)
 
-  if (missing(data_source)) {
-    data_source <- glue::glue("Data Source: World Health Organization
+  data_source_out <- glue::glue("Data Source: {data_source}
                               Map Production: WHO Health Emergencies Programme
                               \u00A9 WHO {format(Sys.Date(), '%Y')}. All rights reserved.")
-  }
 
 
   logo <-  pull_who_logo(region)
@@ -46,7 +44,7 @@ who_map_annotate <- function(region = "HQ", data_source) {
       logo, x = unit(logo_x, "npc"), y = unit(logo_y,"npc"), width = logo_width)
     )),
     # annotation_custom(rasterGrob(logo), xmin = 125, xmax = 175, ymin = 70, ymax = 100),
-    labs(caption = glue::glue("{text_disc}\n\n{data_source}"))
+    labs(caption = glue::glue("{text_disc}\n\n{data_source_out}"))
   )
 
 }
