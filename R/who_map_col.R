@@ -13,7 +13,8 @@ who_map_col <- function(x = "no_data") {
             x == "background" ~ "#EBEBEB",
             x == "lakes" ~ "#ECECEC",
             x == "border" ~ "#9c9c9c",
-            x == "title" ~ "#0093D5")
+            x == "title" ~ "#0093D5",
+            x == "adm0_mask" ~ "#808080")
 
 
 }
