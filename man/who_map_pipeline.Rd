@@ -8,7 +8,9 @@ code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 who_map_pipeline(
   sf = pull_who_adm0(),
   region = "HQ",
-  data_source = "World Health Organization"
+  data_source = "World Health Organization",
+  na_scale = TRUE,
+  no_data_scale = TRUE
 )
 }
 \arguments{
@@ -17,6 +19,10 @@ who_map_pipeline(
 \item{region}{- user defined region for logo and disclaimer text}
 
 \item{data_source}{- user defined data source}
+
+\item{na_scale}{- should a new scale for not applicable be added?}
+
+\item{add_no_data_scale}{- should a new scale for no data be added?}
 }
 \description{
 wrapper function to add all components to who map
