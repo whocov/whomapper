@@ -2,25 +2,34 @@
 #' code by IZAWA, Yurie & LAURENSON-SCHAFER Henry
 #' @details function to add disputed territories to WHO map
 #' @param sf list of shapefiles to be used
-#' @param new_scale - should a new scale be added?
+#' @param na_scale - should a new scale for not applicable be added?
+#' @param no_data_scale - should a new scale for no data be added?
 #' @export
 
 
-who_map_disp <- function(sf = pull_who_adm0(), add_na_scale = TRUE) {
+who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = TRUE) {
 
   disp_area <- sf$disp_area
   disp_border <- sf$disp_border
 
-  if (add_na_scale) {
+  vals_disp <- c()
+
+  if (na_scale) {
+    vals_disp <- append(vals_disp, c("Not applicable" = who_map_col("not_applicable")))
+  }
+  if (no_data_scale) {
+    vals_disp <- append(vals_disp, c("No data" = who_map_col("no_data")))
+  }
+
+  if (length(vals_disp) > 0) {
     geoms_out <- list(
       ggnewscale::new_scale_fill(),
-      scale_fill_manual(values=c("Not applicable" = who_map_col("not_applicable"),
-                                 "No data" = who_map_col("no_data")),
+      scale_fill_manual(values = vals_disp,
                         name = NULL,
-                        breaks = c("Not applicable", "No data"),
+                        breaks = names(vals_disp),
                         drop = FALSE,
-                        limits = c("Not applicable", "No data"),
-                        labels = c("Not applicable", "No data"))
+                        limits = names(vals_disp),
+                        labels = names(vals_disp))
     )
   } else {
     geoms_out <- list()
