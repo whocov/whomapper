@@ -13,6 +13,7 @@ who_map_theme <- function() {
       # Background
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill ="#BEEBF5"),
       axis.text.x = element_blank(),
       axis.ticks = element_blank(),
       axis.title.x = element_blank(),
