@@ -3,6 +3,6 @@
 #' @param x - a label name
 #' @export
 
-whp_map_legend_labs <- function(x) {
+who_map_legend_labs <- function(x) {
   replace_na(x, "No data")
 }
