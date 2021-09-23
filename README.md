@@ -86,14 +86,14 @@ library(phifunc)
 library(tidyverse)
 library(glue)
 
-case_death <- pull_phi_data() %>% normalise_date()
+case_death <- pull_phi_data()
 
 cd_latest <- case_death %>% 
   group_by(iso3) %>% 
   filter(report_date == max(report_date)) %>% 
   ungroup()
 
-  sfs <- pull_who_adm0()
+sfs <- pull_who_adm0()
 
 cases_sf <- left_join(
   sfs$adm0,
