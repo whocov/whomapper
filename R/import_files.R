@@ -9,4 +9,6 @@
 #'@import ggnewscale
 #'@import grid
 #'@import readr
+#'@import patchwork
+
 NULL

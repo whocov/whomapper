@@ -5,7 +5,12 @@
 \title{theme for WHO maps
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_theme()
+who_map_theme(xlim = NULL, ylim = NULL)
+}
+\arguments{
+\item{xlim}{- the coordinate limits of the x axis}
+
+\item{ylim}{- the coordinate limits of the y axis}
 }
 \description{
 theme for WHO maps

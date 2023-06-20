@@ -7,6 +7,8 @@ code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
 who_map_pipeline(
   sf = pull_who_adm0(),
+  xlim = NULL,
+  ylim = NULL,
   region = "HQ",
   data_source = "World Health Organization",
   na_scale = TRUE,
@@ -15,6 +17,10 @@ who_map_pipeline(
 }
 \arguments{
 \item{sf}{- list of shapefiles to be used}
+
+\item{xlim}{- the coordinate limits of the x axis}
+
+\item{ylim}{- the coordinate limits of the y axis}
 
 \item{region}{- user defined region for logo and disclaimer text}
 

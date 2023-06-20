@@ -29,22 +29,24 @@ who_map_annotate <- function(region = "HQ", data_source = "World Health Organiza
     TRUE ~ NA_character_
   )
 
-  if (grepl("hq|global", region, ignore.case = T)) {
-    logo_y <- 1.06
-    logo_x <- 0.91
-    logo_width <- 0.18
-  } else if (grepl("^sea", region, ignore.case = T)) {
-    logo_y <- 1.07
-    logo_x <- 0.92
-    logo_width <- 0.16
-  }
+  # if (grepl("hq|global", region, ignore.case = T)) {
+  #   logo_y <- 1.06
+  #   logo_x <- 0.91
+  #   logo_width <- 0.18
+  # } else if (grepl("^sea", region, ignore.case = T)) {
+  #   logo_y <- 1.07
+  #   logo_x <- 0.92
+  #   logo_width <- 0.16
+  # }
+
 
   list(
-    annotation_custom(grobTree(rasterGrob(
-      logo, x = unit(logo_x, "npc"), y = unit(logo_y,"npc"), width = logo_width)
-    )),
+    labs(caption = glue::glue("{text_disc}\n\n{data_source_out}")),
+    patchwork::inset_element(grid::rasterGrob(logo), 0.85, -0.1, 1, 0, align_to = 'panel')
+    # annotation_custom(grobTree(rasterGrob(
+    #   logo, x = unit(logo_x, "npc"), y = unit(logo_y,"npc"), width = logo_width)
+    # )),
     # annotation_custom(rasterGrob(logo), xmin = 125, xmax = 175, ymin = 70, ymax = 100),
-    labs(caption = glue::glue("{text_disc}\n\n{data_source_out}"))
   )
 
 }

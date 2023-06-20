@@ -1,13 +1,20 @@
 #' theme for WHO maps
 #' code by IZAWA, Yurie & LAURENSON-SCHAFER Henry
 #' @details theme for WHO maps
+#' @param xlim - the coordinate limits of the x axis
+#' @param ylim - the coordinate limits of the y axis
+
 #' @export
 
 
-who_map_theme <- function() {
+who_map_theme <- function(xlim = NULL, ylim = NULL) {
+
+  x_exp <- if (!is.null(xlim)) NULL else c(0, 0)
+  y_exp <- if (!is.null(ylim)) NULL else c(-80, 100)
+
   list(
-    coord_sf(expand = FALSE, clip = "off"),
-    expand_limits(x = c(0, 0), y = c(-80, 100)),
+    coord_sf(expand = FALSE, clip = "on", xlim = xlim, ylim = ylim),
+    expand_limits(x = x_exp, y = y_exp),
     guides(fill = guide_legend(override.aes = list(col = "black"))),
     theme(
       # Background
