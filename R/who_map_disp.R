@@ -46,7 +46,7 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
       # 1) Aksai Chin
       ggpattern::geom_sf_pattern(data = disp_area[disp_area$name == "Aksai Chin",],
                                  pattern = 'stripe',
-                                 pattern_spacing = 0.0015,
+                                 pattern_spacing = 0.0025,
                                  pattern_angle = 50,
                                  #pattern_density = 0.3, # Value from 0-1 (1 being very dense)
                                  pattern_colour = "#cccccc",
