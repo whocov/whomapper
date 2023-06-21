@@ -34,7 +34,7 @@ who_map_theme <- function(xlim = NULL, ylim = NULL) {
       plot.title = element_text(color = who_map_col("title"), size = 16,
                                 face = "bold", hjust = 0),
       plot.subtitle = element_text(color = who_map_col("title"), size = 13, hjust = 0),
-      plot.caption = element_text(hjust = 0, size = 8),
+      plot.caption = element_text(hjust = 0, size = 6),
 
       # Legend
       legend.position = "right",

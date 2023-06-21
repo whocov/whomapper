@@ -42,7 +42,7 @@ who_map_annotate <- function(region = "HQ", data_source = "World Health Organiza
 
   list(
     labs(caption = glue::glue("{text_disc}\n\n{data_source_out}")),
-    patchwork::inset_element(grid::rasterGrob(logo), 0.85, -0.1, 1, 0, align_to = 'panel')
+    patchwork::inset_element(grid::rasterGrob(logo), 0.85, 1, 1, 1.1, align_to = 'panel')
     # annotation_custom(grobTree(rasterGrob(
     #   logo, x = unit(logo_x, "npc"), y = unit(logo_y,"npc"), width = logo_width)
     # )),
