@@ -21,4 +21,10 @@ Imports:
   grid,
   readr
 Remotes: coolbutuseless/ggpattern
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
