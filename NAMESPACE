@@ -2,6 +2,7 @@
 
 export(geom_sf_who_line)
 export(geom_sf_who_poly)
+export(pull_sfs)
 export(pull_who_adm0)
 export(pull_who_adm1)
 export(pull_who_logo)

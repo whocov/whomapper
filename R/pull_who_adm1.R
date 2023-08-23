@@ -8,6 +8,7 @@
 
 pull_who_adm1 <- function() {
 
+  warning("THIS FUNCTION IS NOW DEPRECATED AND WILL NOT BE SUPPORTED IN FUTURE VERSIONS")
   out <- readr::read_rds(system.file("extdata", "adm1.rds", package="whomapper")) %>%
     janitor::clean_names()
 

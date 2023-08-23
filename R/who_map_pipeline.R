@@ -11,18 +11,37 @@
 #' @param add_no_data_scale - should a new scale for no data be added?
 #' @export
 
-who_map_pipeline <- function(sf = pull_who_adm0(),
-                             xlim = NULL, ylim = NULL, box_lims = NULL,
+who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_server = FALSE),
+                             xlim = NULL,
+                             ylim = NULL,
+                             box_lims = NULL,
+                             box_padding = 0.05,
                              region = "HQ",
                              data_source = "World Health Organization",
+                             include_adm0_line = TRUE,
                              na_scale = TRUE,
                              no_data_scale = TRUE) {
 
-  list(
-    geom_sf_who_line(data = sf[[grep("_line$", names(sf))]]),
-    who_map_disp(sf, na_scale = na_scale, no_data_scale = no_data_scale),
-    who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims),
-    who_map_annotate(region = region, data_source = data_source)
+  if (purrr::is_list(sf) & "disp_area" %in% names(sf) & "disp_border" %in% names(sf)) {
+    disp_layer <- who_map_disp(sf, na_scale = na_scale, no_data_scale = no_data_scale)
+  } else {
+    disp_layer <- NULL
+    include_adm0_line <- FALSE
+  }
+
+  out <- append(
+    disp_layer,
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims),
+         who_map_annotate(region = region, data_source = data_source))
   )
 
+  if (include_adm0_line) {
+    out <- append(
+      list(geom_sf_who_line(data = sf[[grep("_line$", names(sf))]])), out)
+  }
+
+  return(out)
+
 }
+
+

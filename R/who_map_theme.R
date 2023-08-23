@@ -8,14 +8,13 @@
 #' @export
 
 
-who_map_theme <- function(xlim = NULL, ylim = NULL, box_lims = NULL) {
+who_map_theme <- function(xlim = NULL, ylim = NULL, box_lims = NULL, box_padding = 0.05) {
 
 
   if (is.null(xlim) & is.null(ylim) & !is.null(box_lims)) {
-    diff_x <- (box_lims[["xmax"]] - box_lims[["xmin"]]) * 0.05
-    diff_y <- (box_lims[["ymax"]] - box_lims[["ymin"]]) * 0.05
-    xlim <- c(box_lims[["xmin"]] - diff_x, box_lims[["xmax"]] + diff_x)
-    ylim <- c(box_lims[["ymin"]] - diff_y, box_lims[["ymax"]] + diff_y)
+    box_lims <- pad_box(box_lims, box_padding)
+    xlim <- c(box_lims[["xmin"]], box_lims[["xmax"]])
+    ylim <- c(box_lims[["ymin"]], box_lims[["ymax"]])
 
   }
   x_exp <- if (!is.null(xlim)) NULL else c(0, 0)
@@ -57,3 +56,17 @@ who_map_theme <- function(xlim = NULL, ylim = NULL, box_lims = NULL) {
     )
   )
 }
+
+pad_box <- function(box_lims, mult = 0.05) {
+
+  diff_x <- (box_lims[["xmax"]] - box_lims[["xmin"]]) * mult
+  diff_y <- (box_lims[["ymax"]] - box_lims[["ymin"]]) * mult
+
+  box_lims[["xmin"]] <- box_lims[["xmin"]] - diff_x
+  box_lims[["xmax"]] <- box_lims[["xmax"]] + diff_x
+  box_lims[["ymin"]] <- box_lims[["ymin"]] - diff_y
+  box_lims[["ymax"]] <- box_lims[["ymax"]] + diff_y
+
+  box_lims
+}
+
