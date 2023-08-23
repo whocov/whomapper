@@ -25,7 +25,6 @@ who_map_theme <- function(xlim = NULL, ylim = NULL, box_lims = NULL, box_padding
   list(
     coord_sf(expand = FALSE, clip = "on", xlim = xlim, ylim = ylim),
     expand_limits(x = x_exp, y = y_exp),
-    guides(fill = guide_legend(override.aes = list(col = "black"))),
     theme(
       # Background
       panel.grid.major = element_blank(),
