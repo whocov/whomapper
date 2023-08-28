@@ -5,12 +5,18 @@
 \title{function to add annotations to WHO map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_annotate(region = "HQ", data_source = "World Health Organization")
+who_map_annotate(
+  region = "HQ",
+  data_source = "World Health Organization",
+  production_team = "WHO Health Emergencies Programme"
+)
 }
 \arguments{
 \item{region}{- user defined region for logo and disclaimer text}
 
 \item{data_source}{- user defined data source}
+
+\item{production_team}{- for the caption, define the team that produced the map. Defaults to _WHO Health Emergencies Programme_}
 }
 \description{
 function to add annotations to WHO map

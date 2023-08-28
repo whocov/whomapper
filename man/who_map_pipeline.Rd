@@ -13,6 +13,7 @@ who_map_pipeline(
   box_padding = 0.05,
   region = "HQ",
   data_source = "World Health Organization",
+  production_team = "WHO Health Emergencies Programme",
   include_adm0_line = TRUE,
   na_scale = TRUE,
   no_data_scale = TRUE
@@ -30,6 +31,10 @@ who_map_pipeline(
 \item{region}{- user defined region for logo and disclaimer text}
 
 \item{data_source}{- user defined data source}
+
+\item{production_team}{- for the caption, define the team that produced the map. Defaults to _WHO Health Emergencies Programme_}
+
+\item{include_adm0_line}{- should the specialised adm0 borders be used? Note that these are borders **excluding** coastlines.}
 
 \item{na_scale}{- should a new scale for not applicable be added?}
 

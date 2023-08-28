@@ -3,15 +3,18 @@
 #' @details function to add annotations to WHO map
 #' @param region - user defined region for logo and disclaimer text
 #' @param data_source - user defined data source
+#' @param production_team - for the caption, define the team that produced the map. Defaults to _WHO Health Emergencies Programme_
 #' @export
 
 
-who_map_annotate <- function(region = "HQ", data_source = "World Health Organization") {
+who_map_annotate <- function(region = "HQ",
+                             data_source = "World Health Organization",
+                             production_team = "WHO Health Emergencies Programme") {
 
   # 2. Data source (modify accordingly)
 
   data_source_out <- glue::glue("Data Source: {data_source}
-                              Map Production: WHO Health Emergencies Programme
+                              Map Production: {production_team}
                               \u00A9 WHO {format(Sys.Date(), '%Y')}. All rights reserved.")
 
 
