@@ -39,14 +39,14 @@ pull_sfs <- function(adm_level = 0, iso3 = NULL, region = NULL, query_server = T
 
   } else {
 
-    if (adm_level == 2) stop("ADM2 not available offline")
+    if (adm_level == 2) stop("ADM2 not available offline, please use query_server = TRUE")
 
     ## read from offline data
     if (adm_level == 0) {
       dat <- readr::read_rds(system.file("extdata", "adm0.rds", package="whomapper"))
 
-      if (!is.null(iso3)) dat <- filter(dat, iso_3_code %in% iso3)
-      if (!is.null(region)) dat <- filter(dat, who_region %in% region)
+      if (!is.null(iso3)) dat$adm0 <- filter(dat$adm0, iso_3_code %in% iso3)
+      if (!is.null(region)) dat$adm0 <- filter(dat$adm0, who_region %in% region)
 
 
     } else if (adm_level == 1) {

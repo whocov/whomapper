@@ -32,7 +32,10 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
                         labels = names(vals_disp))
     )
   } else {
-    geoms_out <- NULL
+    geoms_out <- list(ggnewscale::new_scale_fill(),
+                      scale_fill_manual(values = c("Not applicable" = who_map_col("not_applicable"))),
+                      guides(fill = "none"))
+
   }
 
   geoms_out <- append(

@@ -114,7 +114,7 @@ ggplot() +
 
 ## Producing regional maps  
 
-It is also possible to show produce maps at country or regional level, based on changing the boundaries of the map. For example, to show the same map in the context of SEARO, we can edit the shapefiles to not show data for other countries. We can then zoom into the specified area, either by supplying coordinates, or generating a bounding box and suppling it to `who_map_pipeline()`.
+It is also possible to produce maps at country or regional level, based on changing the boundaries of the map. For example, to show the same map in the context of SEARO, we can edit the shapefiles to not show data for other countries. We can then zoom into the specified area, either by supplying coordinates, or generating a bounding box and suppling it to `who_map_pipeline()`.
 
 Use of alternative WHO logos is also possible, via the region option in `who_map_pipeline()`
 
@@ -166,7 +166,7 @@ ggplot() +
 
 ```
 
-Different projections are especially useful when displaying specific areas of the world - a number of projections can be found at [spatialreference.org](spatialreference.org) - the user can search for a specific file and display it in proj4 format.
+Different projections are especially useful when displaying specific areas of the world - a number of projections can be found at [spatialreference.org](www.spatialreference.org) - the user can search for a specific file and display it in proj4 format.
 
 ## Plotting country maps
 
@@ -211,7 +211,7 @@ ggplot() +
 
 ```
 
-We can also pull in global shapefiles for admin 0 level to provide a background to the plot. This is especially helpful when it comes to Indonesia, as some borders bisect islands. This may be especially important when dealing with countries that have disputed areas adjacent to them. It should be noted that this solution uses all adm0 countries - to speed up plotting, the user can filter out countries not in the vicinity of the area of interest. This can be done as in the following:
+We can also pull in global shapefiles for admin 0 level to provide a background to the plot. This is especially helpful when it comes to Indonesia, as some borders bisect islands. This may be especially important when dealing with countries that have disputed areas adjacent to them. It should be noted that this solution uses all adm0 countries - to speed up plotting, the user can filter out countries not in the vicinity of the area of interest. This can be done by first adding and additional polygon layer with all admin 0 countries, as shown below:
 
 ```{r idn map adjustment}
 
@@ -222,9 +222,11 @@ sfs_global_idn <- map(sfs,
 
 ## plot data
 ggplot() +
+  
   ## first plot background adm0 polygons
   geom_sf_who_poly(data = sfs_global_idn$adm0, fill = who_map_col("no_data"),
                    col = who_map_col("border")) +
+  
   ## plot as normal
   geom_sf_who_poly(data = sf_idn, aes(fill = category), col = who_map_col("border")) +
   scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
@@ -257,7 +259,7 @@ ggplot() +
   
   geom_sf_text(data = sf_idn %>% filter(category == "High"), 
                aes(label = str_wrap(adm1_viz_n, 10)),
-               color = "#48494B",size=3, check_overlap = TRUE) +
+               color = "#48494B",size=3, check_overlap = FALSE) +
 
   scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
                     breaks = c("High", "Medium", "Low")) +
@@ -268,3 +270,47 @@ ggplot() +
 
 
 ```
+
+## Controlling minor aesthetic options
+
+There are additional parameters in {whomapper} designed for modifying minor aesthetic options. Some examples of these are:
+
+- Changing the location of the WHO logo on the map
+
+- Changing the map authors and source of data in the disclaimer
+
+- Removing legend elements which are supplied by default
+
+Note that, as with all maps produced here, the onus is on the user to ensure maps are compliant with WHO legal standards.
+
+Examples of this in use can be seen with the following map of the WHO AFRO region:
+
+
+```{r afro map}
+
+vaccine_sf_afro <- vaccine_sf %>% 
+  mutate(persons_fully_vaccinated_per100 = ifelse(who_region == "AFRO", persons_fully_vaccinated_per100, NA_real_))
+
+afro_box <- sf::st_bbox(vaccine_sf_afro %>% 
+                           filter(who_region == "AFRO"))
+
+
+
+ggplot() +
+  geom_sf_who_poly(data = vaccine_sf_afro, aes(fill = persons_fully_vaccinated_per100)) +
+  scale_fill_fermenter(name = "Fully vaccinated per 100", 
+                       palette = "RdYlGn", limits = c(0, 100),
+                       direction = 1, na.value = who_map_col("no_data")) +
+  labs(title ="Persons fully vaccined per 100, COVID-19", 
+       subtitle = str_glue("as of {format(max(vaccine_sf$date_updated, na.rm = TRUE), '%d %b %y')}")) +
+  who_map_pipeline(sfs, box_lims = afro_box,
+                   production_team = "MY WHO TEAM",  ## name of production team
+                   data_source = "VACCINE DATA SOURCE", ## data source
+                   logo_location = "bottomleft", ## where the logo is located
+                   logo_outside_panel = FALSE, ## should the logo fall inside or outside the plot panel
+                   na_scale = FALSE,  ## show the 'not applicable' box in the legend
+                   no_data_scale = FALSE, ## show the 'no data' box in the legend
+                   include_adm0_line = TRUE) 
+
+```
+

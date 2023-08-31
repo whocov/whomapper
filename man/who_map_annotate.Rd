@@ -8,7 +8,9 @@ code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 who_map_annotate(
   region = "HQ",
   data_source = "World Health Organization",
-  production_team = "WHO Health Emergencies Programme"
+  production_team = "WHO Health Emergencies Programme",
+  logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
+  logo_outside_panel = TRUE
 )
 }
 \arguments{
@@ -16,7 +18,12 @@ who_map_annotate(
 
 \item{data_source}{- user defined data source}
 
-\item{production_team}{- for the caption, define the team that produced the map. Defaults to _WHO Health Emergencies Programme_}
+\item{production_team}{- for the caption, define the team that produced the map.
+Defaults to _WHO Health Emergencies Programme_}
+
+\item{logo_location}{- user defined logo location - one of c("topright", "bottomright", "topleft", "bottomleft")}
+
+\item{logo_outside_panel}{- should the logo sit outside the panel? TRUE or FALSE}
 }
 \description{
 function to add annotations to WHO map
