@@ -29,7 +29,8 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
                              logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
                              logo_outside_panel = TRUE) {
 
-  region <- match.arg(str_to_upper(region), c("HQ", "SEARO"))
+  ## for some reason emro doesn't have a logo on the brand portal???
+  region <- match.arg(str_to_upper(region), c("HQ", "SEARO", "EURO", "WPRO", "AMRO", "PAHO", "AFRO"))
 
 
   if (purrr::is_list(sf) & "disp_area" %in% names(sf) & "disp_border" %in% names(sf)) {

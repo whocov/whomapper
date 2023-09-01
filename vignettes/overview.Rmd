@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 {whomapper} is a R package internal to WHO, intended to house shapefiles and produce WHO legal maps. While this package can produce legal maps, please note that **the user of this package is responsible for ensuring that any maps they produce fulfill WHO legal standards**. The WHO map SOP can be accessed [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf){target="_blank"}.
 
-We start by loading admin 0 shapefiles, and WHO vaccine data for visualisation by country:
+We start by loading admin 0 shapefiles, and WHO vaccine data for visualisation by country. Note that it is possible to query shapefiles directly from the WHO servers via the `query_server` argument. While the package does contain snapshots of adm0 and amd1 shapefiles, this may become outdated over time, and is not guaranteed to be up-to-date.:
 
 ```{r setup}
 pacman::p_load(tidyverse, whomapper, sf, lubridate)
