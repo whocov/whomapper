@@ -6,11 +6,11 @@ Authors: Yurie Izawa & Henry Laurenson-Schafer
 
 This is an experiemental package to house WHO shapefiles and create WHO legal maps. ***Please note that the user of this package is responsible for ensuring that any maps they produce fuffil WHO legal standards.*** Please read the WHO map SOP before using [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf).
 
-***THIS APP IS CURRENTLY IN EARLY DEVELOPMENT - PLEASE LOG A GITHUB ISSUE OR CONTACT THE AUTHORS FOR ANY ISSUES***
+***AS OF 5th September 2023, this package has undergone extensive rewrites. For up to date information run the vignette***
 
 ## Installation
 
-To install this package for the first time: 
+To install this package for the first time (note that a users PAT can be used): 
 
 ```
 devtools::install_github("whocov/whomapper", 
@@ -20,20 +20,24 @@ devtools::install_github("whocov/whomapper",
 ```
 ## Reading shapefiles
 
-The user can read all who admin0 shapefiles using the following command. These are prepackaged, and do not require an internet connection to read:
+The user can now read all WHO Admin 0, 1, 2, or 3 shapefiles using the following function. Admin 0 and 1 are prepackaged (although may be out of date), and do not require an internet connection to read. For up to date shapefiles, please query the WHO servers.
 
 ```
 library(whomapper)
 
-# read shp files
-who_shp <- whomapper::pull_who_adm0()
+# read shp files using prepackaged files
+who_adm0 <- whomapper::pull_who_adm0(adm_level = 0, query_server = FALSE)
+
+# read shp files for all admin 1 regions of France by querying server
+fra_adm1 <- whomapper::pull_who_adm0(adm_level = 1, iso3 = "FRA", query_server = TRUE)
+
 ```
 
-Please note that no shapefiles beyond Admin 0 are currently packaged - this may be added as a feature if there is demand in the future.
+Note that adm0 shapefiles are packages alongside disputed regions and borders, and a custom border layer that does not include coastlines. This is used to make cleaner maps where only land borders are shown with lines.
 
 ## Making maps
 
-This package has been set up to allow for flexible use of `ggplot2` for mapping. It's highly recommended that the `tidyverse` is installed before using this package to manipulate maps. The basic workflow for using this package is:
+This package has been set up to allow for flexible use of `ggplot2` for mapping and is designed to be used generally with the tidyverse family of packages. The basic workflow for using this package is:
 
 1. Read in shapefiles (packaged with `whomapper`)
 2. Merge data of interest with the `adm0` list element of the shapefiles (the polygons)
@@ -113,7 +117,6 @@ ggplot() +
 
 
 who_map_save(glue::glue("cases_per_100k_{Sys.Date()}.png"))
-
 
 ```
 
