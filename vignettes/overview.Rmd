@@ -11,17 +11,18 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.width = 11.8, 
-  fig.height = 7.2,
-  warning = FALSE
+  fig.width = 9.44, 
+  fig.height = 5.76,
+  warning = FALSE, 
+  message = FALSE
 )
 ```
 
 ## Introduction
 
-`whomapper` is a R package internal to WHO, intended to house shapefiles and produce WHO legal maps. While this package can produce legal maps, please note that **the user of this package is responsible for ensuring that any maps they produce fulfill WHO legal standards**. The WHO map SOP can be accessed [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf){target="_blank"}.
+{whomapper} is a R package internal to WHO, intended to house shapefiles and produce WHO legal maps. While this package can produce legal maps, please note that **the user of this package is responsible for ensuring that any maps they produce fulfill WHO legal standards**. The WHO map SOP can be accessed [here](http://gamapserver.who.int/gho/gis/training/DMF_GIS2010_2_SOPSforWHOMaps.pdf){target="_blank"}.
 
-We start by loading admin 0 shapefiles, and WHO vaccine data for visualisation by country:
+We start by loading admin 0 shapefiles, and WHO vaccine data for visualisation by country. Note that it is possible to query shapefiles directly from the WHO servers via the `query_server` argument. While the package does contain snapshots of adm0 and amd1 shapefiles, this may become outdated over time, and is not guaranteed to be up-to-date.:
 
 ```{r setup}
 pacman::p_load(tidyverse, whomapper, sf, lubridate)
@@ -30,8 +31,8 @@ pacman::p_load(tidyverse, whomapper, sf, lubridate)
 vaccine_data <- whomapper:::vaccine_data
 
 ## pull in shapefiles for admin 0
-sfs <- whomapper::pull_who_adm0()
-
+## We use the offline shapefiles here, but better practice may be getting online files
+sfs <- whomapper::pull_sfs(adm_level = 0, query_server = FALSE)
 
 ```
 
@@ -40,14 +41,14 @@ sfs <- whomapper::pull_who_adm0()
 
 This package has been set up to allow for flexible use of `ggplot2` for mapping. It's highly recommended that `tidyverse` is installed before using this package to manipulate maps. The basic workflow for using this package is:
 
-1. Read in shapefiles (packaged with `whomapper`)
+1. Read in shapefiles (packaged with {whomapper})
 2. Merge data of interest with the `adm0` list element of the shapefiles (the polygons)
 3. Begin a standard ggplot:
     1. Plot shapefiles with `geom_sf_who_poly()`
     2. Define legend aesthetics with `scale_...()`
     3. Define labels for the plot
 4. call `who_map_pipeline()` to define disputed areas, theme, legal text etc.
-5. Save the plot using `who_map_save()` - This ensures that dimensions are correct. 
+5. Save the plot using `who_map_save()` - This ensures that dimensions are correct for global maps
 
 
 Some basic tips for using this package are:
@@ -68,8 +69,8 @@ ggplot() +
                     na.value = who_map_col("no_data"),
                     name = "WHO Region") +
   labs(title ="World map by WHO region", 
-       subtitle = glue::glue("as of {format(Sys.Date(), '%d %b %y')}")) +
-  who_map_pipeline(sf = sfs) 
+       subtitle = str_glue("as of {format(Sys.Date(), '%d %b %y')}")) +
+  who_map_pipeline(sf = sfs, include_adm0_line = TRUE) 
 
 
 
@@ -93,7 +94,8 @@ vaccine_sf <- left_join(
   vaccine_data %>% select(-report_country, -who_region),
   by = c("iso_3_code" = "iso3")
 ) %>% 
-  mutate(persons_fully_vaccinated_per100 = ifelse(persons_fully_vaccinated_per100 > 100, 100, persons_fully_vaccinated_per100))
+  mutate(persons_fully_vaccinated_per100 = 
+           ifelse(persons_fully_vaccinated_per100 > 100, 100, persons_fully_vaccinated_per100))
 
 
 ggplot() +
@@ -110,9 +112,9 @@ ggplot() +
 ```
 
 
-## Producing non-global maps  
+## Producing regional maps  
 
-It is also possible to show produce maps at country or regional level, based on changing the boundaries of the map. For example, to show the same map in the context of SEARO, we can edit the shapefiles to not show data for other countries. We can then zoom into the specified area, either by supplying coordinates, or generating a bounding box and suppling it to `who_map_pipeline()`.
+It is also possible to produce maps at country or regional level, based on changing the boundaries of the map. For example, to show the same map in the context of SEARO, we can edit the shapefiles to not show data for other countries. We can then zoom into the specified area, either by supplying coordinates, or generating a bounding box and suppling it to `who_map_pipeline()`.
 
 Use of alternative WHO logos is also possible, via the region option in `who_map_pipeline()`
 
@@ -133,18 +135,19 @@ ggplot() +
                        direction = 1, na.value = who_map_col("no_data")) +
   labs(title ="Persons fully vaccined per 100, COVID-19", 
        subtitle = str_glue("as of {format(max(vaccine_sf$date_updated, na.rm = TRUE), '%d %b %y')}")) +
-  who_map_pipeline(sfs, box_lims = searo_box, region = "searo") 
+  who_map_pipeline(sfs, box_lims = searo_box, region = "searo", include_adm0_line = TRUE) 
 
 ```
 
 <br> 
 <br>
 
-If needs require, it is also possible to change map projections. Note that in doing this, the coordinates of maps are altered, and will need to be controlled for. For example, for a WHO EURO map:
+If needs require, it is also possible to change map projections. Note that in doing this, the coordinates of maps are altered, and will need to be controlled for when setting limits. The use of the `bom_lims` argument of the `who_map_pipeline()` function is effective for this. For example, for a WHO EURO map:
 
 ```{r euro map}
 
-sfs_reproj <- map(sfs, ~mutate(.x, geometry = st_transform(geometry, "+proj=laea +lon_0=39.8 +lat_0=34.7")))
+sfs_reproj <- map(sfs, 
+                  ~mutate(.x, geometry = st_transform(geometry, "+proj=laea +lon_0=39.8 +lat_0=34.7")))
 
 box <- sfs_reproj$adm0 %>% 
   filter(who_region == "EURO") %>% 
@@ -157,9 +160,157 @@ ggplot() +
                     na.value = who_map_col("no_data"),
                     name = "WHO Region") +
   labs(title ="World map by WHO region", 
-       subtitle = glue::glue("as of {format(Sys.Date(), '%d %b %y')}")) +
-  who_map_pipeline(box_lims = box)
+       subtitle = str_glue("as of {format(Sys.Date(), '%d %b %y')}")) +
+  who_map_pipeline(sf = sfs_reproj, box_lims = box)
 
+
+```
+
+Different projections are especially useful when displaying specific areas of the world - a number of projections can be found at [spatialreference.org](www.spatialreference.org) - the user can search for a specific file and display it in proj4 format.
+
+## Plotting country maps
+
+We can also use whotools to produce country-specific maps. Note that these maps map require significantly more work to produce, and may require some adjustment to work with the WHO themes.
+
+We can use the example of Indonesia to demonstrate, simulating arbitrary risk classification data to to highlight administrative regions. Note that it may help to use to pass a `col` argument to `geom_sf_who_poly()` to highlight borders - this is often not needed for the country level, as a separate line shapefile is supplied:
+
+
+```{r idn map}
+
+## pull in shapefiles for indonesia
+
+sf_idn <- pull_sfs(adm_level = 1, iso3 = "IDN", query_server = FALSE)
+
+
+## reproject files to centre on indonesia
+projection <- "+proj=longlat +a=6378160 +b=6356774.50408554 +no_defs "
+sf_idn <- sf_idn %>% 
+  mutate(geometry = st_transform(geometry, projection))
+
+## create bounding box around plotting area to define limits
+bbox  <- sf_idn %>% 
+  st_bbox()
+
+## simulate random risk category data
+categories <- c("High", "Medium", "Low")
+
+sf_idn <- sf_idn %>% 
+  mutate(category = factor(sample(categories, replace = TRUE, size = n())))
+
+
+## plot data
+ggplot() +
+  geom_sf_who_poly(data = sf_idn, aes(fill = category),
+                   col = who_map_col("border")) +
+  scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
+                     breaks = c("High", "Medium", "Low")) +
+  labs(title ="Indonesia mapping example",
+       subtitle = str_glue("as of {format(Sys.Date(), '%d %b %y')}")) +
+  who_map_pipeline(sf = sf_idn, box_lims = bbox, include_adm0_line = FALSE)
+
+
+```
+
+We can also pull in global shapefiles for admin 0 level to provide a background to the plot. This is especially helpful when it comes to Indonesia, as some borders bisect islands. This may be especially important when dealing with countries that have disputed areas adjacent to them. It should be noted that this solution uses all adm0 countries - to speed up plotting, the user can filter out countries not in the vicinity of the area of interest. This can be done by first adding and additional polygon layer with all admin 0 countries, as shown below:
+
+```{r idn map adjustment}
+
+## reproject global data 
+sfs_global_idn <- map(sfs,
+                      ~mutate(.x, geometry = st_transform(geometry, "+proj=longlat +a=6378160 +b=6356774.50408554 +no_defs")))
+
+
+## plot data
+ggplot() +
+  
+  ## first plot background adm0 polygons
+  geom_sf_who_poly(data = sfs_global_idn$adm0, fill = who_map_col("no_data"),
+                   col = who_map_col("border")) +
+  
+  ## plot as normal
+  geom_sf_who_poly(data = sf_idn, aes(fill = category), col = who_map_col("border")) +
+  scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
+                    breaks = c("High", "Medium", "Low")) +
+  labs(title ="Indonesia mapping example",
+       subtitle = str_glue("as of {format(Sys.Date(), '%d %b %y')}")) +
+  ## change out sfs for global sfs
+  who_map_pipeline(sf = sfs_global_idn, box_lims = bbox, include_adm0_line = TRUE)
+
+
+```
+
+
+We can finish this map off my adding labels to administrative regions. Doing this for every region would create a very busy plot, so we'll restrict this to regions with a classification level of _high_. There is no specific packaged function for this, as there are no specific WHO defaults to control for. This can be done as in the following:
+
+```{r idn map final}
+
+## reproject global data 
+sfs_global_idn <- map(sfs,
+                      ~mutate(.x, geometry = st_transform(geometry, "+proj=longlat +a=6378160 +b=6356774.50408554 +no_defs")))
+
+
+## plot data
+ggplot() +
+  ## first plot background adm0 polygons
+  geom_sf_who_poly(data = sfs_global_idn$adm0, fill = who_map_col("no_data"),
+                   col = who_map_col("border")) +
+  ## plot as normal
+  geom_sf_who_poly(data = sf_idn, aes(fill = category), col = who_map_col("border")) +
+  
+  geom_sf_text(data = sf_idn %>% filter(category == "High"), 
+               aes(label = str_wrap(adm1_viz_n, 10)),
+               color = "#48494B",size=3, check_overlap = FALSE) +
+
+  scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
+                    breaks = c("High", "Medium", "Low")) +
+  labs(title ="Indonesia mapping example",
+       subtitle = str_glue("as of {format(Sys.Date(), '%d %b %y')}")) +
+  ## change out sfs for global sfs
+  who_map_pipeline(sf = sfs_global_idn, box_lims = bbox, include_adm0_line = TRUE)
+
+
+```
+
+## Controlling minor aesthetic options
+
+There are additional parameters in {whomapper} designed for modifying minor aesthetic options. Some examples of these are:
+
+- Changing the location of the WHO logo on the map
+
+- Changing the map authors and source of data in the disclaimer
+
+- Removing legend elements which are supplied by default
+
+Note that, as with all maps produced here, the onus is on the user to ensure maps are compliant with WHO legal standards.
+
+Examples of this in use can be seen with the following map of the WHO AFRO region:
+
+
+```{r afro map}
+
+vaccine_sf_afro <- vaccine_sf %>% 
+  mutate(persons_fully_vaccinated_per100 = ifelse(who_region == "AFRO", persons_fully_vaccinated_per100, NA_real_))
+
+afro_box <- sf::st_bbox(vaccine_sf_afro %>% 
+                           filter(who_region == "AFRO"))
+
+
+
+ggplot() +
+  geom_sf_who_poly(data = vaccine_sf_afro, aes(fill = persons_fully_vaccinated_per100)) +
+  scale_fill_fermenter(name = "Fully vaccinated per 100", 
+                       palette = "RdYlGn", limits = c(0, 100),
+                       direction = 1, na.value = who_map_col("no_data")) +
+  labs(title ="Persons fully vaccined per 100, COVID-19", 
+       subtitle = str_glue("as of {format(max(vaccine_sf$date_updated, na.rm = TRUE), '%d %b %y')}")) +
+  who_map_pipeline(sfs, box_lims = afro_box,
+                   production_team = "MY WHO TEAM",  ## name of production team
+                   data_source = "VACCINE DATA SOURCE", ## data source
+                   logo_location = "bottomleft", ## where the logo is located
+                   logo_outside_panel = FALSE, ## should the logo fall inside or outside the plot panel
+                   na_scale = FALSE,  ## show the 'not applicable' box in the legend
+                   no_data_scale = FALSE, ## show the 'no data' box in the legend
+                   include_adm0_line = TRUE) 
 
 ```
 

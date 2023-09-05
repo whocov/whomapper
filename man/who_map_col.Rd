@@ -5,7 +5,10 @@
 \title{function to get default who map colours
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_col(x = "no_data")
+who_map_col(
+  x = c("no_data", "not_applicable", "background", "lakes", "border", "title",
+    "adm0_mask")
+)
 }
 \arguments{
 \item{x}{which colour index should be used}
