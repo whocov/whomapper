@@ -5,12 +5,23 @@
 \title{wrapper function around ggsave to save map in correct dimensions
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_save(name, plot = ggplot2::last_plot(), dpi = 800, ...)
+who_map_save(
+  name,
+  plot = ggplot2::last_plot(),
+  width = 11.8,
+  height = 7.2,
+  dpi = 800,
+  ...
+)
 }
 \arguments{
 \item{name}{the name of the plot to be saved}
 
 \item{plot}{the plot object to be saved. defaults to ggplot2::last_plot()}
+
+\item{width}{width of the plot. Defaults to 11.8in for world maps}
+
+\item{height}{height of the plot. Defaults to 7.2in for world maps}
 }
 \description{
 wrapper function around ggsave to save map in correct dimensions
