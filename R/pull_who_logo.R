@@ -11,6 +11,11 @@ pull_who_logo <- function(region = "HQ") {
   filename <- case_when(
     grepl("hq|global", region, ignore.case = T) ~ "WHO_logo.png",
     grepl("^sea", region, ignore.case = T) ~ "SEARO_logo.png",
+    grepl("^eur", region, ignore.case = T) ~ "EURO_logo.png",
+    grepl("^wpr", region, ignore.case = T) ~ "WPRO_logo.png",
+    grepl("^afr", region, ignore.case = T) ~ "AFRO_logo.png",
+    grepl("^pah|^amr", region, ignore.case = T) ~ "PAHO_logo.png",
+    ## for some reason emro doesn't have a logo on the brand portal???
     TRUE ~ NA_character_
   )
 

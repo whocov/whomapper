@@ -8,6 +8,7 @@
 
 pull_who_adm0 <- function() {
 
+  warning("THIS FUNCTION IS NOW DEPRECATED AND WILL NOT BE SUPPORTED IN FUTURE VERSIONS, please use pull_sfs()")
   out <- readr::read_rds(system.file("extdata", "adm0.rds", package="whomapper"))
 
   return(out)

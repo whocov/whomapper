@@ -6,7 +6,9 @@
 #' @export
 
 
-who_map_col <- function(x = "no_data") {
+who_map_col <- function(x = c("no_data", "not_applicable", "background", "lakes", "border", "title", "adm0_mask")) {
+
+  x <- match.arg(x)
 
   case_when(x == "no_data" ~ "#FFFFFF",
             x == "not_applicable" ~ "#cccccc",
