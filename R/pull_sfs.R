@@ -140,6 +140,7 @@ read_geodata <- function(x) {
     dplyr::select(dplyr::contains("adm"),
                   dplyr::contains("name"),
                   dplyr::contains("shape"),
+                  dplyr::contains("pcode"),
                   dplyr::any_of(c("iso_3_code", "who_region", "center_lon", "center_lat")),
                   geometry)
 }
