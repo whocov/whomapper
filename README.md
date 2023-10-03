@@ -14,7 +14,6 @@ To install this package for the first time (note that a users PAT can be used):
 
 ```
 devtools::install_github("whocov/whomapper", 
-                          auth_token = "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", 
                           force = TRUE, 
                           dependencies = TRUE)
 ```
