@@ -72,7 +72,7 @@ pull_sfs <- function(adm_level = 0, iso3 = NULL, region = NULL, query_server = T
 
 #' @author HLS
 #' @details function to generate a url, for use in `pull_sfs()`.
-
+#' @noRd
 
 generate_query_url <- function(sf_type, iso3 = NULL, who_region = NULL) {
 
@@ -109,6 +109,7 @@ generate_query_url <- function(sf_type, iso3 = NULL, who_region = NULL) {
 
 #' @author HLS
 #' @details function to read sfs from server with provided url, for use in `pull_sfs()`.
+#' @noRd
 
 read_geodata <- function(x) {
 

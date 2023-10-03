@@ -17,7 +17,6 @@ Imports:
   dplyr,
   sf,
   janitor,
-  ggsn,
   ggplot2,
   tidyr,
   stringr,
