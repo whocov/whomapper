@@ -52,7 +52,7 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
   if (include_adm0_line) {
     out <- append(
-      list(geom_sf_who_line(data = sf[[grep("_line$", names(sf))]])), out)
+      list(geom_sf_who_line(data = sf[[grep("_line$", names(sf))]], size = 0.1)), out)
   }
 
   return(out)
