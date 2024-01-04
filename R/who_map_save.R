@@ -8,7 +8,7 @@
 #' @export
 
 
-who_map_save <- function(name, plot = ggplot2::last_plot(), width = 11.8, height = 7.2, dpi = 800, ...) {
+who_map_save <- function(name, plot = ggplot2::last_plot(), width = 11.8, height = 7.2, dpi = 250, ...) {
 
   ggsave(name, plot, width = width, height = height, dpi = dpi, ...)
 
