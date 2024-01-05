@@ -42,18 +42,27 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
   out <- append(
     disp_layer,
-    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims),
-         who_map_annotate(region = region,
-                          data_source = data_source,
-                          production_team = production_team,
-                          logo_location = logo_location,
-                          logo_outside_panel = logo_outside_panel))
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
   )
 
   if (include_adm0_line) {
-    out <- append(
-      list(geom_sf_who_line(data = sf[[grep("_line$", names(sf))]], size = 0.1)), out)
+    out <-
+      append(
+        out,
+        list(geom_sf_who_line(data = sf$adm0_line, linewidth = 0.1))
+      )
+     # geom_sf(data = sf$adm0_line)
   }
+
+  out <- append(
+    out,
+    who_map_annotate(region = region,
+                     data_source = data_source,
+                     production_team = production_team,
+                     logo_location = logo_location,
+                     logo_outside_panel = logo_outside_panel)
+  )
+
 
   return(out)
 

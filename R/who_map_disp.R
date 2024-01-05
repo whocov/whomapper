@@ -53,60 +53,60 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
                                  pattern_colour = "#cccccc",
                                  pattern_fill = "#cccccc",
                                  pattern_size = 0.2,
-                                 size = 0.2,
+                                 linewidth = 0.1,
                                  color = NA,
                                  fill = NA),
 
       geom_sf(data = disp_area[disp_area$name == "Aksai Chin",],
-              fill = NA, color = "#9c9c9c", size = 0.2),
+              fill = NA, color = "#9c9c9c", linewidth = 0.1),
 
       # 2) Jammu and Kashmir
       # Fill: grey 20%, Outline: same as ADM0 lines
       geom_sf(data = disp_area[disp_area$name == "Jammu and Kashmir",],
-              fill = "#cccccc", color = "#9c9c9c", size = 0.2),
+              fill = "#cccccc", color = "#9c9c9c", linewidth = 0.1),
 
       geom_sf(data = disp_border[disp_border$name %in% c("J&K (IND Claim)", "J&K (PAK Claim)"),],
-              color="#ECECEC", linetype = "dotted", size = 0.2),
+              color="#ECECEC", linetype = "dotted", linewidth = 0.1),
       geom_sf(data = disp_border[disp_border$name =="J&K Line of Control",],
-              color = "#9c9c9c", linetype = "dotted", size = 0.2),
+              color = "#9c9c9c", linetype = "dotted", linewidth = 0.1),
       # 4) Sudan - South Sudan (Abyei)
       # Fill & outline: grey 20%
       geom_sf(data = disp_area[disp_area$name == "Abyei",], fill = "#cccccc", color = "#9c9c9c",
-              size = 0.2),
+              linewidth = 0.1),
       geom_sf(data = disp_border[disp_border$name == "Abyei (SSD Claim)",],
-              color = "#ECECEC", linetype = "dotted", size = 0.2),
+              color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
       geom_sf(data = disp_border[disp_border$name %in% c("Abyei (SDN Claim)", "Sudan-South Sudan"),],
-              color = "#ECECEC", linetype = "dotted", size = 0.2),
+              color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
 
       # 5) Arunachal Pradesh: same as ADM0 lines
       geom_sf(data = disp_border[disp_border$name =="Arunachal Pradesh",],
-              color="#9c9c9c", size = 0.2),
+              color="#9c9c9c", linewidth = 0.1),
 
       # 6) Egypt-Sudan
       geom_sf(data = disp_border[disp_border$name %in% c("Bir Tawil 1", "Halayib Triangle (EGY Claim)"),],
-              color = "#9c9c9c", size = 0.2),
+              color = "#9c9c9c", linewidth = 0.1),
       geom_sf(data = disp_border[disp_border$name %in% c("Bir Tawil 2", "Halayib Triangle (SDN Claim)"),],
-              color = "#ECECEC", linetype = "dotted", size = 0.2),
+              color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
 
       # 7) South Sudan - Kenya
       geom_sf(data = disp_border[disp_border$name == "Ilemi Triangle",],
-              color = "#9c9c9c", linetype = "dotted", size = 0.2),
+              color = "#9c9c9c", linetype = "dotted", linewidth = 0.1),
 
       # 8) North - South Korea: grey 10%
       geom_sf(data = disp_border[disp_border$name == "Korean DMZ",],
-              color = "#ECECEC", linetype = "dotted", size = 0.2),
+              color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
 
       # 9) Kosovo
       geom_sf(data = disp_border[disp_border$name == "Kosovo",],
-              color = "#9c9c9c", linetype = "dotted", size = 0.2),
+              color = "#9c9c9c", linetype = "dotted", linewidth = 0.1),
 
       # 10) oPt: grey 10%
       geom_sf(data = disp_border[disp_border$name=="West Bank",],
-              color = "#ECECEC", linetype = "dotted", size = 0.2),
+              color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
 
       # Lakes
       geom_sf(data = disp_area[disp_area$name=="Lakes",],
-              col = who_map_col("lakes"), fill = who_map_col("lakes"), size = 0.2)
+              col = who_map_col("lakes"), fill = who_map_col("lakes"), linewidth = 0.1)
 
       # ggsn::scalebar(sf$adm0, dist = 1000, dist_unit = "km",
       #                transform = TRUE, model = "WGS84", anchor = c("x" = 140, "y" = -60), st.size = 3)
