@@ -40,19 +40,22 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
     include_adm0_line <- FALSE
   }
 
-  out <- append(
-    disp_layer,
-    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
-  )
+  out <- list()
 
   if (include_adm0_line) {
     out <-
       append(
-        out,
+        disp_layer,
         list(geom_sf_who_line(data = sf$adm0_line, linewidth = 0.1))
       )
      # geom_sf(data = sf$adm0_line)
   }
+
+  out <- append(
+    out,
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
+  )
+
 
   out <- append(
     out,
