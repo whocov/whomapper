@@ -105,7 +105,7 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
               color = "#ECECEC", linetype = "dotted", linewidth = 0.1),
 
       # Lakes
-      geom_sf(data = disp_area[disp_area$name=="Lakes",],
+      geom_sf(data = disp_area[grepl("Lake", disp_area$name),],
               col = who_map_col("lakes"), fill = who_map_col("lakes"), linewidth = 0.1)
 
       # ggsn::scalebar(sf$adm0, dist = 1000, dist_unit = "km",
