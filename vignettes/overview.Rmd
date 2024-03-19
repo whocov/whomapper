@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 We start by loading admin 0 shapefiles, and WHO vaccine data for visualisation by country. Note that it is possible to query shapefiles directly from the WHO servers via the `query_server` argument. While the package does contain snapshots of adm0 and amd1 shapefiles, this may become outdated over time, and is not guaranteed to be up-to-date.:
 
 ```{r setup}
-pacman::p_load(tidyverse, whomapper, sf, lubridate)
+pacman::p_load(tidyverse, whomapper, sf, lubridate, ggrepel)
 
 ## we use WHO vaccine data to visualise on a map
 vaccine_data <- whomapper:::vaccine_data
@@ -257,9 +257,13 @@ ggplot() +
   ## plot as normal
   geom_sf_who_poly(data = sf_idn, aes(fill = category), col = who_map_col("border")) +
   
-  geom_sf_text(data = sf_idn %>% filter(category == "High"), 
-               aes(label = str_wrap(adm1_viz_n, 10)),
-               color = "#48494B",size=3, check_overlap = FALSE) +
+  ## we use ggrepel here to get halo text
+  ggrepel::geom_text_repel(data = sf_idn %>% filter(category == "High"), 
+                           stat = "sf_coordinates",
+                           aes(label = str_wrap(adm1_viz_n, 10), geometry = geometry),
+                           color = "#48494B", size=3, 
+                           bg.color = "white",
+                           bg.r = 0.25) +
 
   scale_fill_manual(values = c("High" = "#fc8d59", "Medium" = "#ffffbf", "Low" = "#91cf60"),
                     breaks = c("High", "Medium", "Low")) +

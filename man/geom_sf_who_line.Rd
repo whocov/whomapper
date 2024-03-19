@@ -9,7 +9,7 @@ geom_sf_who_line(
   mapping = aes(),
   data = NULL,
   col = who_map_col("border"),
-  size = 0.2,
+  size = 0.1,
   ...
 )
 }

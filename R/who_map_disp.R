@@ -17,20 +17,22 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
   if (na_scale) {
     vals_disp <- append(vals_disp, c("Not applicable" = who_map_col("not_applicable")))
   }
+
   if (no_data_scale) {
     vals_disp <- append(vals_disp, c("No data" = who_map_col("no_data")))
   }
 
+
   if (length(vals_disp) > 0) {
     geoms_out <- list(
       ggnewscale::new_scale_fill(),
-      scale_fill_manual(values = vals_disp,
+      scale_fill_manual(values = unname(vals_disp),
                         name = NULL,
                         breaks = names(vals_disp),
                         drop = FALSE,
                         limits = names(vals_disp),
-                        labels = names(vals_disp))
-    )
+                        labels = names(vals_disp)),
+    guides(fill = guide_legend(override.aes = list(color = "black", alpha = 1))))
   } else {
     geoms_out <- list(ggnewscale::new_scale_fill(),
                       scale_fill_manual(values = c("Not applicable" = who_map_col("not_applicable"))),
@@ -41,6 +43,7 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
   geoms_out <- append(
     geoms_out,
     list(
+      geom_sf(data = disp_area[disp_area$name == "Western Sahara",], aes(fill = "No data"), color = NA),
       geom_sf(data = disp_area[disp_area$name == "Western Sahara",], aes(fill = "Not applicable"), color = NA),
 
       # Disputed areas
@@ -107,6 +110,7 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
       # Lakes
       geom_sf(data = disp_area[grepl("Lake", disp_area$name),],
               col = who_map_col("lakes"), fill = who_map_col("lakes"), linewidth = 0.1)
+
 
       # ggsn::scalebar(sf$adm0, dist = 1000, dist_unit = "km",
       #                transform = TRUE, model = "WGS84", anchor = c("x" = 140, "y" = -60), st.size = 3)

@@ -10,7 +10,7 @@ who_map_save(
   plot = ggplot2::last_plot(),
   width = 11.8,
   height = 7.2,
-  dpi = 800,
+  dpi = 250,
   ...
 )
 }

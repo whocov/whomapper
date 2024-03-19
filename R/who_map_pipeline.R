@@ -13,6 +13,9 @@
 #' Note that these are borders **excluding** coastlines.
 #' @param na_scale - should a new scale for not applicable be added?
 #' @param add_no_data_scale - should a new scale for no data be added?
+#' @param no_annotation - if FALSE, no logo, title and annotation are appended.
+#' @param logo_location - which part of the plot should the logo go?
+#' @param logo_outside_panel- should the logo be shown in the panel?
 #' @export
 
 who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_server = FALSE),
@@ -26,6 +29,7 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
                              include_adm0_line = TRUE,
                              na_scale = TRUE,
                              no_data_scale = TRUE,
+                             no_annotation = FALSE,
                              logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
                              logo_outside_panel = TRUE) {
 
@@ -39,7 +43,6 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
     disp_layer <- NULL
     include_adm0_line <- FALSE
   }
-
   out <- list()
 
   if (include_adm0_line) {
@@ -57,18 +60,20 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
   out <- append(
     out,
-    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims, background_col = background_col))
   )
 
+  if (!no_annotation) {
+    out <- append(
+      out,
+      who_map_annotate(region = region,
+                       data_source = data_source,
+                       production_team = production_team,
+                       logo_location = logo_location,
+                       logo_outside_panel = logo_outside_panel)
+    )
 
-  out <- append(
-    out,
-    who_map_annotate(region = region,
-                     data_source = data_source,
-                     production_team = production_team,
-                     logo_location = logo_location,
-                     logo_outside_panel = logo_outside_panel)
-  )
+  }
 
 
   return(out)

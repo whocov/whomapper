@@ -17,6 +17,7 @@ who_map_pipeline(
   include_adm0_line = TRUE,
   na_scale = TRUE,
   no_data_scale = TRUE,
+  no_annotation = FALSE,
   logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
   logo_outside_panel = TRUE
 )
@@ -42,7 +43,13 @@ Note that these are borders **excluding** coastlines.}
 
 \item{na_scale}{- should a new scale for not applicable be added?}
 
+\item{no_annotation}{- if FALSE, no logo, title and annotation are appended.}
+
+\item{logo_location}{- which part of the plot should the logo go?}
+
 \item{add_no_data_scale}{- should a new scale for no data be added?}
+
+\item{logo_outside_panel-}{should the logo be shown in the panel?}
 }
 \description{
 wrapper function to add all components to who map
