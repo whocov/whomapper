@@ -60,7 +60,7 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
   out <- append(
     out,
-    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims, background_col = background_col))
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
   )
 
   if (!no_annotation) {
