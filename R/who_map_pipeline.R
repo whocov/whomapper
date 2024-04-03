@@ -13,6 +13,7 @@
 #' Note that these are borders **excluding** coastlines.
 #' @param na_scale - should a new scale for not applicable be added?
 #' @param add_no_data_scale - should a new scale for no data be added?
+#' @param background_col - the colour of the background (ocean) and the lakes. Defaults to #E6E7E8
 #' @param no_annotation - if FALSE, no logo, title and annotation are appended.
 #' @param logo_location - which part of the plot should the logo go?
 #' @param logo_outside_panel- should the logo be shown in the panel?
@@ -29,6 +30,7 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
                              include_adm0_line = TRUE,
                              na_scale = TRUE,
                              no_data_scale = TRUE,
+                             background_col = who_map_col("background"),
                              no_annotation = FALSE,
                              logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
                              logo_outside_panel = TRUE) {
@@ -38,7 +40,9 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
 
   if (purrr::is_list(sf) & "disp_area" %in% names(sf) & "disp_border" %in% names(sf)) {
-    disp_layer <- who_map_disp(sf, na_scale = na_scale, no_data_scale = no_data_scale)
+    disp_layer <- who_map_disp(sf, na_scale = na_scale,
+                               no_data_scale = no_data_scale,
+                               background_col = background_col)
   } else {
     disp_layer <- NULL
     include_adm0_line <- FALSE
@@ -60,7 +64,7 @@ who_map_pipeline <- function(sf = whomapper::pull_sfs(adm_level = 0, query_serve
 
   out <- append(
     out,
-    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims))
+    list(who_map_theme(xlim = xlim, ylim = ylim, box_lims = box_lims, background_col = background_col))
   )
 
   if (!no_annotation) {

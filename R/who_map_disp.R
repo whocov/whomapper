@@ -4,10 +4,12 @@
 #' @param sf list of shapefiles to be used
 #' @param na_scale - should a new scale for not applicable be added?
 #' @param no_data_scale - should a new scale for no data be added?
+#' @param background_col - the colour of the background (ocean) and the lakes. Defaults to #E6E7E8
 #' @export
 
 
-who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = TRUE) {
+who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = TRUE,
+                         background_col = who_map_col("background")) {
 
   disp_area <- sf$disp_area
   disp_border <- sf$disp_border
@@ -109,7 +111,7 @@ who_map_disp <- function(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = 
 
       # Lakes
       geom_sf(data = disp_area[grepl("Lake", disp_area$name),],
-              col = who_map_col("lakes"), fill = who_map_col("lakes"), linewidth = 0.1)
+              col = who_map_col("lakes"), fill = background_col, linewidth = 0.1)
 
 
       # ggsn::scalebar(sf$adm0, dist = 1000, dist_unit = "km",

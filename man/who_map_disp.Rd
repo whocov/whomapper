@@ -5,7 +5,12 @@
 \title{function to add disputed territories to WHO map
 code by IZAWA, Yurie & LAURENSON-SCHAFER Henry}
 \usage{
-who_map_disp(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = TRUE)
+who_map_disp(
+  sf = pull_who_adm0(),
+  na_scale = TRUE,
+  no_data_scale = TRUE,
+  background_col = who_map_col("background")
+)
 }
 \arguments{
 \item{sf}{list of shapefiles to be used}
@@ -13,6 +18,8 @@ who_map_disp(sf = pull_who_adm0(), na_scale = TRUE, no_data_scale = TRUE)
 \item{na_scale}{- should a new scale for not applicable be added?}
 
 \item{no_data_scale}{- should a new scale for no data be added?}
+
+\item{background_col}{- the colour of the background (ocean) and the lakes. Defaults to #E6E7E8}
 }
 \description{
 function to add disputed territories to WHO map

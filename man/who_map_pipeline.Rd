@@ -17,6 +17,7 @@ who_map_pipeline(
   include_adm0_line = TRUE,
   na_scale = TRUE,
   no_data_scale = TRUE,
+  background_col = who_map_col("background"),
   no_annotation = FALSE,
   logo_location = c("topright", "bottomright", "topleft", "bottomleft"),
   logo_outside_panel = TRUE
@@ -42,6 +43,8 @@ Defaults to _WHO Health Emergencies Programme_}
 Note that these are borders **excluding** coastlines.}
 
 \item{na_scale}{- should a new scale for not applicable be added?}
+
+\item{background_col}{- the colour of the background (ocean) and the lakes. Defaults to #E6E7E8}
 
 \item{no_annotation}{- if FALSE, no logo, title and annotation are appended.}
 
