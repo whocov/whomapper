@@ -1,7 +1,7 @@
 Package: whomapper
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Produces map static map visualization in line with WHO legal mapping SOPs
+Version: 0.1.1
 Authors@R: c(HLS = person("Henry", "Laurenson-Schafer",
                   email = "laurensonschaferh@who.int",
                   role = c("aut", "cre")),
