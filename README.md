@@ -121,5 +121,5 @@ This code produces these plots:
 ![who_region_map](https://user-images.githubusercontent.com/38218241/120607542-90298500-c450-11eb-919f-9b255a946bd8.png)
 
 
-![cases_per_100k_2021-06-03](https://user-images.githubusercontent.com/38218241/120607578-991a5680-c450-11eb-8bf1-6428a5f3c967.png)
+![covid_vaccine](https://github.com/user-attachments/assets/983da949-9f14-46fb-996d-fd9792f7d5aa)
 
