@@ -65,6 +65,7 @@ Be sure to check out our sister app [phifunc](https://github.com/whocov/phifunc)
 library(whomapper)
 library(tidyverse)
 library(glue)
+library(ggplot2)
 
 sfs <- pull_who_adm0()
 
@@ -89,33 +90,30 @@ library(phifunc)
 library(tidyverse)
 library(glue)
 
-case_death <- pull_phi_data()
+## we use WHO vaccine data to visualise on a map
+vaccine_data <- whomapper:::vaccine_data
 
-cd_latest <- case_death %>% 
-  group_by(iso3) %>% 
-  filter(report_date == max(report_date)) %>% 
-  ungroup()
-
-sfs <- pull_who_adm0()
-
-cases_sf <- left_join(
+## join the vaccine data to the country boundary sf object
+vaccine_sf <- left_join(
   sfs$adm0,
-  cd_latest,
+  vaccine_data %>% select(-report_country, -who_region),
   by = c("iso_3_code" = "iso3")
-)
+) %>%
+  mutate(persons_fully_vaccinated_per100 =
+           ifelse(persons_fully_vaccinated_per100 > 100, 100, persons_fully_vaccinated_per100))
 
+## plot
 ggplot() +
-  geom_sf_who_poly(data = cases_sf, aes(fill = case_total / population * 1e5)) +
-  scale_fill_fermenter(trans = "pseudo_log",
-                       name = "cases/100K pop", 
-                       palette = "YlOrRd", 
-                       breaks = c(50, 500, 5e3),
+  geom_sf_who_poly(data = vaccine_sf, aes(fill = persons_fully_vaccinated_per100)) +
+  scale_fill_fermenter(name = "Fully vaccinated per 100",
+                       palette = "RdYlGn", limits = c(0, 100),
                        direction = 1, na.value = who_map_col("no_data")) +
-  labs(title ="COVID-19 cases per 100k", subtitle = glue::glue("as of {format(Sys.Date(), '%d %b %y')}")) +
-  who_map_pipeline() 
+  labs(title ="Persons fully vaccined per 100, COVID-19",
+       subtitle = str_glue("as of {format(max(vaccine_sf$date_updated, na.rm = TRUE), '%d %B %y')}")) +
+  who_map_pipeline(sf = sfs)
 
+who_map_save(glue::glue("who_covid_vaccine_map.png"), dpi = 700)
 
-who_map_save(glue::glue("cases_per_100k_{Sys.Date()}.png"))
 
 ```
 
