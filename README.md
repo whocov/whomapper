@@ -25,10 +25,10 @@ The user can now read all WHO Admin 0, 1, 2, or 3 shapefiles using the following
 library(whomapper)
 
 # read shp files using prepackaged files
-who_adm0 <- whomapper::pull_who_adm0(adm_level = 0, query_server = FALSE)
+who_adm0 <- whomapper::pull_sfs(adm_level = 0, query_server = FALSE)
 
 # read shp files for all admin 1 regions of France by querying server
-fra_adm1 <- whomapper::pull_who_adm0(adm_level = 1, iso3 = "FRA", query_server = TRUE)
+fra_adm1 <- whomapper::pull_sfs(adm_level = 1, iso3 = "FRA", query_server = TRUE)
 
 ```
 
