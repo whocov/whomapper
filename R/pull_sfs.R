@@ -96,9 +96,12 @@ generate_query_url <- function(sf_type, iso3 = NULL, who_region = NULL) {
   static_params <- "f=pgeojson&outFields=*&returnGeometry=true"
 
   url <- dplyr::case_when(
-    sf_type == "0" | sf_type == "adm0" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM0/FeatureServer/0/query?{filter_string}{static_params}"),
-    sf_type == "1" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM1/FeatureServer/0/query?{filter_string}{static_params}"),
-    sf_type == "2" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM2/FeatureServer/0/query?{filter_string}{static_params}"),
+    #sf_type == "0" | sf_type == "adm0" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM0/FeatureServer/0/query?{filter_string}{static_params}"),
+    sf_type == "0" | sf_type == "adm0" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/GLOBAL_WHE_ADMIN_BOUNDARIES/FeatureServer/2/query?{filter_string}{static_params}"),
+    #sf_type == "1" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM1/FeatureServer/0/query?{filter_string}{static_params}"),
+    sf_type == "1" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/GLOBAL_WHE_ADMIN_BOUNDARIES/FeatureServer/1/query?{filter_string}{static_params}"),
+    #sf_type == "2" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM2/FeatureServer/0/query?{filter_string}{static_params}"),
+    sf_type == "2" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/GLOBAL_WHE_ADMIN_BOUNDARIES/FeatureServer/0/query?{filter_string}{static_params}"),
     sf_type == "3" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/arcgis/rest/services/Detailed_Boundary_ADM3/FeatureServer/0/query?{filter_string}{static_params}"),
     sf_type == "disp_area" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_Disputed_Areas/FeatureServer/0/query?where=1%3D1&{static_params}"),
     sf_type == "disp_border" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/arcgis/rest/services/Detailed_Boundary_Disputed_Borders/FeatureServer/0/query?where=1%3D1&{static_params}"),

@@ -32,8 +32,7 @@ vaccine_data <- whomapper:::vaccine_data
 
 ## pull in shapefiles for admin 0
 ## We use the offline shapefiles here, but better practice may be getting online files
-sfs <- whomapper::pull_sfs(adm_level = 0, query_server = FALSE)
-
+sfs <- whomapper::pull_sfs(adm_level = 0, query_server = TRUE)
 ```
 
 
