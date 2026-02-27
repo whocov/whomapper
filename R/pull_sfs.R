@@ -92,7 +92,8 @@ generate_query_url <- function(sf_type, iso3 = NULL, who_region = NULL) {
     filter_string <- "where=1%3D1&"
   }
 
-  static_params <- "f=pgeojson&resultRecordCount=100000&outFields=*&returnGeometry=true"
+  #static_params <- "f=pgeojson&resultRecordCount=100000&outFields=*&returnGeometry=true"
+  static_params <- "f=pgeojson&outFields=*&returnGeometry=true"
 
   url <- dplyr::case_when(
     sf_type == "0" | sf_type == "adm0" ~ stringr::str_glue("https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/Detailed_Boundary_ADM0/FeatureServer/0/query?{filter_string}{static_params}"),
