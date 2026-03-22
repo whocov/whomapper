@@ -14,8 +14,8 @@ pull_who_logo <- function(region = "HQ") {
     grepl("^eur", region, ignore.case = T) ~ "EURO_logo.png",
     grepl("^wpr", region, ignore.case = T) ~ "WPRO_logo.png",
     grepl("^afr", region, ignore.case = T) ~ "AFRO_logo.png",
-    grepl("^pah|^amr", region, ignore.case = T) ~ "PAHO_logo.png",
-    ## for some reason emro doesn't have a logo on the brand portal???
+    grepl("^pah|^amr", region, ignore.case = T) ~ "AMRO_logo.png",
+    grepl("^emr", region, ignore.case = T) ~ "EMRO_logo.png"
     TRUE ~ NA_character_
   )
 
