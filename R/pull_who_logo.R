@@ -9,6 +9,7 @@
 pull_who_logo <- function(region = "HQ") {
 
   filename <- case_when(
+    # Logos downloaded from the WHO brand portal: https://who.canto.global/v/P1HJAOLE6L/folder/OD2AP?display=list&viewIndex=0&referenceTo=&from=list
     grepl("hq|global", region, ignore.case = T) ~ "WHO_logo.png",
     grepl("^sea", region, ignore.case = T) ~ "SEARO_logo.png",
     grepl("^eur", region, ignore.case = T) ~ "EURO_logo.png",
