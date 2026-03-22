@@ -16,7 +16,7 @@ pull_who_logo <- function(region = "HQ") {
     grepl("^wpr", region, ignore.case = T) ~ "WPRO_logo.png",
     grepl("^afr", region, ignore.case = T) ~ "AFRO_logo.png",
     grepl("^pah|^amr", region, ignore.case = T) ~ "AMRO_logo.png",
-    grepl("^emr", region, ignore.case = T) ~ "EMRO_logo.png"
+    grepl("^emr", region, ignore.case = T) ~ "EMRO_logo.png",
     TRUE ~ NA_character_
   )
 
